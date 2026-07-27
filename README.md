@@ -1,8 +1,8 @@
 # shared-files
 
-🧩 **7 个 QoderWork Agent Skills，开箱即用**
+🧩 **10 个 QoderWork Agent Skills，开箱即用**
 
-一套经过实战验证的 Agent 技能包，覆盖 HTML 页面生成、问题定义与目标拆解、课题研究、基金业绩归因、C 盘清理等场景。直接复制到本地 skills 目录即可使用。
+一套经过实战验证的 Agent 技能包，覆盖 HTML 页面生成、问题定义与目标拆解、课题研究、基金业绩归因、存储清理、深度研究等场景。直接复制到本地 skills 目录即可使用。
 
 ---
 
@@ -15,7 +15,7 @@
 | | 说明 |
 |---|---|
 | 适用平台 | QoderWork / QoderCLI / 任何支持 SKILL.md 的 Agent |
-| 技能数量 | **7 个**，覆盖开发、分析、学习、运维场景 |
+| 技能数量 | **10 个**，覆盖开发、分析、学习、运维、研究场景 |
 | 使用方式 | 下载文件放入本地 skills 目录，即刻生效 |
 
 ---
@@ -58,14 +58,13 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 
 ---
 
-## 🧰 7 个 Skills 全览
+## 🧰 10 个 Skills 全览
 
 ### 开发与设计
 
 | 技能 | 版本 | 干什么 | 触发词 |
 |---|---|---|---|
 | [`claude-code-style-html`](skills/claude-code-style-html/) | v2.0.0 | 生成暖色纸质风格的自包含 HTML 页面，含完整设计系统（配色/字体/组件/动效） | "做HTML"、"生成页面"、"做个网页"、"写个页面" |
-| [`c-drive-cleanup`](skills/c-drive-cleanup/) | v1.0.0 | Windows C 盘空间扫描与智能清理，自动识别可安全删除的缓存和临时文件 | "C盘清理"、"空间不足"、"磁盘清理" |
 
 ### 思维与学习
 
@@ -80,6 +79,14 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 |---|---|---|---|
 | [`equity-fund-attribution`](skills/equity-fund-attribution/) | v1.0.0 | 权益类基金业绩归因全流程：净值法（T-M/H-M/C-L）、持仓法（Brinson/Barra）、风险归因 | "基金归因"、"业绩归因"、"Brinson" |
 | [`fof-performance-attribution`](skills/fof-performance-attribution/) | v1.0.0 | FOF 基金业绩归因与绩效分析：Brinson 归因、多因子回归、择时检验，含 Python CLI 工具 | "FOF归因"、"选基能力"、"FOF分析" |
+
+### 来自社区（[数字生命卡兹克](https://github.com/KKKKhazix/khazix-skills)）
+
+| 技能 | 干什么 | 触发词 |
+|---|---|---|
+| [`storage-analyzer`](skills/storage-analyzer/) | macOS/Windows 存储分析：扫描磁盘占用，分三级（可自动清理/需判断/谨慎清理），生成交互式 HTML 报告 + 本地服务一键清理 | "存储分析"、"磁盘满了"、"清理空间" |
+| [`hv-analysis`](skills/hv-analysis/) | 横纵分析法深度研究：纵轴追踪发展历程，横轴竞品对比，交叉产出洞察，输出 PDF 报告 | "横纵分析"、"深度研究"、"帮我分析" |
+| [`leader`](skills/leader/) | 把一句话想法拆成 AI Agent 能独立跑完的目标任务书，含实测数字、白名单地界、防作弊验收 | "帮我给 agent 写个目标"、"写个任务书" |
 
 ---
 
@@ -183,32 +190,98 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 
 ---
 
+### storage-analyzer — 全平台存储分析（来自卡兹克）
+
+**作者**：[数字生命卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `assets/` + `references/` + `scripts/`
+
+macOS / Windows 双平台只读存储分析助手：
+
+- 扫描整机磁盘占用，找出占空间大户
+- 每项分三级：🟢可自动清理 / 🟡需人工判断 / 🔴谨慎清理
+- 生成交互式 HTML 报告（可折叠、命令可一键复制）
+- 可起本地服务在网页上一键删除（移废纸篓）
+- 扫描全程只读，不修改任何文件
+
+比 c-drive-cleanup 更完善，支持 macOS 和 Windows，有可视化报告。
+
+---
+
+### hv-analysis — 横纵分析法深度研究（来自卡兹克）
+
+**作者**：[数字生命卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `references/` + `scripts/`
+
+融合索绪尔历时-共时分析、纵向-横截面研究设计与商学院案例研究法：
+
+- **纵轴**：追踪从诞生到当下的完整生命历程（以叙事故事呈现）
+- **横轴**：在当下时间截面上与竞品/同类系统性横向对比
+- **交叉**：两条轴产出独到洞察
+- 最终产出一份排版精美的 PDF 研究报告
+
+```
+你：帮我研究一下 Cursor 这个产品
+你：深度分析一下 Notion 是怎么做起来的
+```
+
+---
+
+### leader — Agent 目标任务书生成器（来自卡兹克）
+
+**作者**：[数字生命卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `references/`
+
+三个角色：**领导**（你）出想法、**管理者**（Agent）调研写书、**执行者**（Agent 执行模式）拿书独立跑完。
+
+- 先进代码库实测、必要时联网调研
+- 一次性提问（≤5 个），产出 ≤4000 字符的任务书
+- 含实测数字、白名单地界、防作弊验收和断点续跑
+- 执行型与探索型自动分流
+
+```
+你：帮我给 agent 写个目标，把这个项目重构一下
+你：写个任务书让 agent 自己跑这个数据清洗
+```
+
+---
+
 ## 🗂️ 项目结构
 
 ```
 shared-files/
 ├── README.md
+├── LICENSE
 ├── skills/
-│   ├── claude-code-style-html/     # 暖色 HTML 设计系统
+│   ├── ATTRIBUTION.md                  # 社区贡献归属说明
+│   ├── claude-code-style-html/         # 暖色 HTML 设计系统
 │   │   ├── SKILL.md
 │   │   └── template.html
-│   ├── problem-goal-defined/       # 问题定义与目标拆解
+│   ├── problem-goal-defined/           # 问题定义与目标拆解
 │   │   ├── SKILL.md
 │   │   ├── reference-problem.md
 │   │   └── reference-goal.md
-│   ├── topic-question-generator/   # 课题研究问题引擎
+│   ├── topic-question-generator/       # 课题研究问题引擎
 │   │   └── SKILL.md
-│   ├── c-drive-cleanup/            # Windows C 盘清理
+│   ├── c-drive-cleanup/                # Windows C 盘清理
 │   │   └── SKILL.md
-│   ├── equity-fund-attribution/    # 权益基金业绩归因
+│   ├── equity-fund-attribution/        # 权益基金业绩归因
 │   │   └── SKILL.md
-│   └── fof-performance-attribution/# FOF 业绩归因
+│   ├── fof-performance-attribution/    # FOF 业绩归因
+│   │   ├── SKILL.md
+│   │   ├── references/
+│   │   │   ├── methodology.md
+│   │   │   └── report-template.md
+│   │   └── scripts/
+│   │       └── fof_attribution.py
+│   ├── storage-analyzer/               # 全平台存储分析（来自卡兹克）
+│   │   ├── SKILL.md
+│   │   ├── assets/
+│   │   ├── references/
+│   │   └── scripts/
+│   ├── hv-analysis/                    # 横纵分析法深度研究（来自卡兹克）
+│   │   ├── SKILL.md
+│   │   ├── references/
+│   │   └── scripts/
+│   └── leader/                         # Agent 目标任务书（来自卡兹克）
 │       ├── SKILL.md
-│       ├── references/
-│       │   ├── methodology.md
-│       │   └── report-template.md
-│       └── scripts/
-│           └── fof_attribution.py
+│       └── references/
 ```
 
 ---
