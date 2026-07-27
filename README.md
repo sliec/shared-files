@@ -1,6 +1,6 @@
 # shared-files
 
-🧩 **10 个 QoderWork Agent Skills，开箱即用**
+🧩 **9 个 QoderWork Agent Skills，开箱即用**
 
 一套经过实战验证的 Agent 技能包，覆盖 HTML 页面生成、问题定义与目标拆解、课题研究、基金业绩归因、存储清理、深度研究等场景。直接复制到本地 skills 目录即可使用。
 
@@ -15,7 +15,7 @@
 | | 说明 |
 |---|---|
 | 适用平台 | QoderWork / QoderCLI / 任何支持 SKILL.md 的 Agent |
-| 技能数量 | **10 个**，覆盖开发、分析、学习、运维、研究场景 |
+| 技能数量 | **9 个**（6 原创 + 3 社区），覆盖开发、分析、学习、运维、研究场景 |
 | 使用方式 | 下载文件放入本地 skills 目录，即刻生效 |
 
 ---
@@ -58,7 +58,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 
 ---
 
-## 🧰 10 个 Skills 全览
+## 🧰 9 个 Skills 全览
 
 ### 开发与设计
 
