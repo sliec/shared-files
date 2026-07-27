@@ -65,6 +65,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 | 技能 | 版本 | 干什么 | 触发词 |
 |---|---|---|---|
 | [`claude-code-style-html`](skills/claude-code-style-html/) | v2.0.0 | 生成暖色纸质风格的自包含 HTML 页面，含完整设计系统（配色/字体/组件/动效） | "做HTML"、"生成页面"、"做个网页"、"写个页面" |
+| [`c-drive-cleanup`](skills/c-drive-cleanup/) | v1.0.0 | Windows C 盘空间扫描与智能清理，自动识别可安全删除的缓存和临时文件 | "C盘清理"、"空间不足"、"磁盘清理" |
 
 ### 思维与学习
 
