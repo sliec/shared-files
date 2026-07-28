@@ -1,6 +1,6 @@
 # shared-files
 
-🧩 **Skills 同步中心 — 18 个 Agent Skills，换电脑换平台一键拉齐**
+🧩 **Skills 同步中心 — 19 个 Agent Skills，换电脑换平台一键拉齐**
 
 个人的 Agent Skills 集中管理仓库。无论在哪个 Agent 平台、哪台电脑上工作，一行命令就能把所有 Skills 同步到本地。收录原创 Skills 和社区精选，覆盖产品管理、金融分析、数据分析、思维学习、开发运维等场景。
 
@@ -15,7 +15,7 @@
 | | 说明 |
 |---|---|
 | 适用平台 | QoderWork / QoderCLI / 任何支持 SKILL.md 的 Agent |
-| 技能数量 | **18 个**（7 原创 + 11 社区精选），覆盖产品、分析、学习、开发场景 |
+| 技能数量 | **19 个**（7 原创 + 12 社区精选），覆盖产品、分析、学习、开发场景 |
 | 使用方式 | 克隆后一行命令同步到本地 skills 目录 |
 
 ---
@@ -50,7 +50,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 
 ---
 
-## 🧰 18 个 Skills 全览
+## 🧰 19 个 Skills 全览
 
 ### 产品管理
 
@@ -82,6 +82,12 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 | 技能 | 来源 | 干什么 | 触发词 |
 |---|---|---|---|
 | [`statistical-analysis`](skills/statistical-analysis/) | [TerryFYL](https://github.com/TerryFYL/claude-statistical-analysis-skill) | 统计分析顾问：数据诊断 → 方法选择 → APA 表格+图表+结果段落，支持问卷/实验/医学研究 | "统计分析"、"分析我的数据"、"问卷分析" |
+
+### 创意与设计
+
+| 技能 | 来源 | 干什么 | 触发词 |
+|---|---|---|---|
+| [`fireworks-tech-graph`](skills/fireworks-tech-graph/) | [yizhiyanhua-ai](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | 12 种视觉风格画架构图：SVG/PNG/GIF/交互HTML，覆盖架构图、流程图、时序图等 14 种图表类型 | "画架构图"、"画流程图"、"技术图表" |
 
 ### 金融分析
 
@@ -126,6 +132,14 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 | 规划 | 样本量计算 / Power Analysis |
 
 特别适合问卷调查分析：内置信效度分析、缺失数据处理、中文图表支持。
+
+---
+
+### fireworks-tech-graph — 技术架构图绘制
+
+**作者**：[yizhiyanhua-ai](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | 文件：`SKILL.md` + `references/`
+
+12 种视觉风格画架构图，输出 SVG/PNG/GIF/交互HTML。覆盖架构图、流程图、时序图、C4 模型、云部署图、事件流、可观测性、Agent/记忆系统、UML、ER 图、网络拓扑、时间线等 14 种图表类型。
 
 ---
 
@@ -237,6 +251,7 @@ shared-files/
 │   ├── equity-fund-attribution/        # [原创] 权益基金业绩归因
 │   ├── fof-performance-attribution/    # [原创] FOF 业绩归因
 │   ├── fixed-income-fund-attribution/  # [原创] 固收基金业绩归因
+│   ├── fireworks-tech-graph/            # [yizhiyanhua-ai] 技术架构图绘制
 │   ├── statistical-analysis/           # [TerryFYL] 统计分析顾问
 │   ├── prd-doc-writer/                 # [云舒] PRD 撰写
 │   ├── prd-test-writer/                # [云舒] PRD 测试用例
