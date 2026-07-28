@@ -1,56 +1,48 @@
 # shared-files
 
-🧩 **9 个 QoderWork Agent Skills，开箱即用**
+🧩 **Skills 同步中心 — 16 个 Agent Skills，换电脑换平台一键拉齐**
 
-一套经过实战验证的 Agent 技能包，覆盖 HTML 页面生成、问题定义与目标拆解、课题研究、基金业绩归因、存储清理、深度研究等场景。直接复制到本地 skills 目录即可使用。
+个人的 Agent Skills 集中管理仓库。无论在哪个 Agent 平台、哪台电脑上工作，一行命令就能把所有 Skills 同步到本地。收录原创 Skills 和社区精选，覆盖产品管理、金融分析、思维学习、开发运维等场景。
 
 ---
 
 ## 这是什么？
 
-一组可以直接装到 QoderWork / QoderCLI 的 **Agent Skills**。装了之后，你跟 Agent 说"帮我做个网页"或者"帮我定义这个问题"，它就能按照专业流程出活儿。
+一个 **Skills 同步中心**。当你需要在多个 Agent 平台（QoderWork、QoderCLI 等）和不同电脑间切换时，不用再逐个手动搭建 Skills——克隆这个仓库，一行命令全部就位。
 
-> 一句话：**把好用的 Skills 开源，让每个人都能受益。**
+> 一句话：**一次整理，到处可用。**
 
 | | 说明 |
 |---|---|
 | 适用平台 | QoderWork / QoderCLI / 任何支持 SKILL.md 的 Agent |
-| 技能数量 | **9 个**（6 原创 + 3 社区），覆盖开发、分析、学习、运维、研究场景 |
-| 使用方式 | 下载文件放入本地 skills 目录，即刻生效 |
+| 技能数量 | **16 个**（9 原创 + 7 社区精选），覆盖产品、分析、学习、开发场景 |
+| 使用方式 | 克隆后一行命令同步到本地 skills 目录 |
 
 ---
 
-## ⚡ 快速安装
+## ⚡ 一键同步
 
-### 方式一：单文件下载（推荐）
+### 全量同步（推荐，换电脑时用）
 
 ```bash
-# 下载单个 Skill（以 claude-code-style-html 为例）
+# macOS / Linux
+git clone https://github.com/sliec/shared-files.git
+cp -r shared-files/skills/* ~/.qoderwork/skills/
+
+# Windows PowerShell
+git clone https://github.com/sliec/shared-files.git
+Copy-Item -Recurse -Force shared-files\skills\* "$env:USERPROFILE\.qoderwork\skills\"
+```
+
+### 按需下载单个 Skill
+
+```bash
+# macOS / Linux（以 claude-code-style-html 为例）
 mkdir -p ~/.qoderwork/skills/claude-code-style-html
 curl -o ~/.qoderwork/skills/claude-code-style-html/SKILL.md \
   https://raw.githubusercontent.com/sliec/shared-files/main/skills/claude-code-style-html/SKILL.md
 
-# 下载带附属文件的 Skill（以 problem-goal-defined 为例，含 2 个 reference 文件）
-mkdir -p ~/.qoderwork/skills/problem-goal-defined
-curl -o ~/.qoderwork/skills/problem-goal-defined/SKILL.md \
-  https://raw.githubusercontent.com/sliec/shared-files/main/skills/problem-goal-defined/SKILL.md
-curl -o ~/.qoderwork/skills/problem-goal-defined/reference-problem.md \
-  https://raw.githubusercontent.com/sliec/shared-files/main/skills/problem-goal-defined/reference-problem.md
-curl -o ~/.qoderwork/skills/problem-goal-defined/reference-goal.md \
-  https://raw.githubusercontent.com/sliec/shared-files/main/skills/problem-goal-defined/reference-goal.md
-```
-
-### 方式二：整个仓库克隆
-
-```bash
-git clone https://github.com/sliec/shared-files.git
-cp -r shared-files/skills/* ~/.qoderwork/skills/
-```
-
-### 方式三：PowerShell（Windows）
-
-```powershell
-# 以 claude-code-style-html 为例
+# Windows PowerShell
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.qoderwork\skills\claude-code-style-html"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/main/skills/claude-code-style-html/SKILL.md" `
   -OutFile "$env:USERPROFILE\.qoderwork\skills\claude-code-style-html\SKILL.md"
@@ -58,188 +50,148 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 
 ---
 
-## 🧰 9 个 Skills 全览
+## 🧰 16 个 Skills 全览
+
+### 产品管理
+
+| 技能 | 来源 | 干什么 | 触发词 |
+|---|---|---|---|
+| [`prd-doc-writer`](skills/prd-doc-writer/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | PRD 产品需求文档撰写，含标准模板和 Mermaid 流程图 | "写PRD"、"产品需求文档" |
+| [`prd-test-writer`](skills/prd-test-writer/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | PRD 测试用例生成 + 对抗性评审，输出 HTML 评审报告 | "PRD测试"、"测试用例"、"PRD评审" |
+| [`prd-auto-test-loop`](skills/prd-auto-test-loop/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | PRD 自动化测试闭环 | "自动化测试"、"测试闭环" |
 
 ### 开发与设计
 
-| 技能 | 版本 | 干什么 | 触发词 |
+| 技能 | 来源 | 干什么 | 触发词 |
 |---|---|---|---|
-| [`claude-code-style-html`](skills/claude-code-style-html/) | v2.0.0 | 生成暖色纸质风格的自包含 HTML 页面，含完整设计系统（配色/字体/组件/动效） | "做HTML"、"生成页面"、"做个网页"、"写个页面" |
-| [`c-drive-cleanup`](skills/c-drive-cleanup/) | v1.0.0 | Windows C 盘空间扫描与智能清理，自动识别可安全删除的缓存和临时文件 | "C盘清理"、"空间不足"、"磁盘清理" |
+| [`claude-code-style-html`](skills/claude-code-style-html/) | 原创 | 生成暖色纸质风格的自包含 HTML 页面，含 18 种组件 + 设计系统 | "做HTML"、"生成页面"、"写个页面" |
+| [`git-push`](skills/git-push/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | Git 推送助手 | "git push"、"推送代码" |
+| [`github-repo-search`](skills/github-repo-search/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | GitHub 仓库搜索 | "搜GitHub"、"找仓库" |
 
 ### 思维与学习
 
-| 技能 | 版本 | 干什么 | 触发词 |
+| 技能 | 来源 | 干什么 | 触发词 |
 |---|---|---|---|
-| [`problem-goal-defined`](skills/problem-goal-defined/) | v1.0.0 | 将模糊问题精确定义为结构化议题，将宏观目标拆解为可执行路线图。运用 5W2H、5Whys、WBS、OKR、SMART 等框架 | "帮我定义问题"、"目标拆解"、"根因分析"、"制定计划" |
-| [`topic-question-generator`](skills/topic-question-generator/) | v5.0.0 | 课题研究的问题引擎——系统性生成循序渐进的探究问题清单，帮你想透"该问什么" | "帮我分析这个课题"、"帮我提一些问题" |
+| [`problem-goal-defined`](skills/problem-goal-defined/) | 原创 | 将模糊问题精确定义为结构化议题，将宏观目标拆解为可执行路线图 | "帮我定义问题"、"目标拆解"、"根因分析" |
+| [`topic-question-generator`](skills/topic-question-generator/) | 原创 | 课题研究的问题引擎——系统性生成循序渐进的探究问题清单 | "帮我分析这个课题"、"帮我提一些问题" |
+| [`multi-perspective-analysis`](skills/multi-perspective-analysis/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | 多视角分析：内置 10 位大佬思维模型（张小龙/张一鸣/任正非/Munger/Musk/Bezos 等） | "多视角分析"、"换个角度想" |
+| [`readable-output`](skills/readable-output/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | 可读性输出优化，让 Agent 产出更易读 | "优化输出"、"可读性" |
 
 ### 金融分析
 
-| 技能 | 版本 | 干什么 | 触发词 |
+| 技能 | 来源 | 干什么 | 触发词 |
 |---|---|---|---|
-| [`equity-fund-attribution`](skills/equity-fund-attribution/) | v1.0.0 | 权益类基金业绩归因全流程：净值法（T-M/H-M/C-L）、持仓法（Brinson/Barra）、风险归因 | "基金归因"、"业绩归因"、"Brinson" |
-| [`fof-performance-attribution`](skills/fof-performance-attribution/) | v1.0.0 | FOF 基金业绩归因与绩效分析：Brinson 归因、多因子回归、择时检验，含 Python CLI 工具 | "FOF归因"、"选基能力"、"FOF分析" |
+| [`equity-fund-attribution`](skills/equity-fund-attribution/) | 原创 | 权益类基金业绩归因全流程：净值法、持仓法、风险归因 | "基金归因"、"业绩归因"、"Brinson" |
+| [`fof-performance-attribution`](skills/fof-performance-attribution/) | 原创 | FOF 基金业绩归因与绩效分析，含 Python CLI 工具 | "FOF归因"、"选基能力"、"FOF分析" |
 
-### 来自社区（[数字生命卡兹克](https://github.com/KKKKhazix/khazix-skills)）
+### 存储清理
 
-| 技能 | 干什么 | 触发词 |
-|---|---|---|
-| [`storage-analyzer`](skills/storage-analyzer/) | macOS/Windows 存储分析：扫描磁盘占用，分三级（可自动清理/需判断/谨慎清理），生成交互式 HTML 报告 + 本地服务一键清理 | "存储分析"、"磁盘满了"、"清理空间" |
-| [`hv-analysis`](skills/hv-analysis/) | 横纵分析法深度研究：纵轴追踪发展历程，横轴竞品对比，交叉产出洞察，输出 PDF 报告 | "横纵分析"、"深度研究"、"帮我分析" |
-| [`leader`](skills/leader/) | 把一句话想法拆成 AI Agent 能独立跑完的目标任务书，含实测数字、白名单地界、防作弊验收 | "帮我给 agent 写个目标"、"写个任务书" |
+| 技能 | 来源 | 干什么 | 触发词 |
+|---|---|---|---|
+| [`storage-analyzer`](skills/storage-analyzer/) | [卡兹克](https://github.com/KKKKhazix/khazix-skills) | macOS/Windows 存储分析：三级分类 + 交互式 HTML 报告 + 本地服务一键清理 | "存储分析"、"磁盘满了"、"清理空间" |
+| [`c-drive-cleanup`](skills/c-drive-cleanup/) | 原创 | Windows C 盘空间扫描与智能清理（轻量版） | "C盘清理"、"空间不足" |
+
+### 深度研究与 Agent 协作
+
+| 技能 | 来源 | 干什么 | 触发词 |
+|---|---|---|---|
+| [`hv-analysis`](skills/hv-analysis/) | [卡兹克](https://github.com/KKKKhazix/khazix-skills) | 横纵分析法深度研究：纵轴发展历程 + 横轴竞品对比 → PDF 报告 | "横纵分析"、"深度研究"、"帮我分析" |
+| [`leader`](skills/leader/) | [卡兹克](https://github.com/KKKKhazix/khazix-skills) | 把一句话想法拆成 AI Agent 能独立跑完的目标任务书 | "帮我给 agent 写个目标"、"写个任务书" |
 
 ---
 
 ## 📖 各 Skill 详解
 
+### prd-doc-writer — PRD 产品需求文档撰写
+
+**作者**：[云舒](https://github.com/yunshu0909/yunshu_skillshub) | 文件：`SKILL.md` + `assets/` + `references/`
+
+按产品经理标准体例撰写 PRD，包含需求背景、用户故事、功能规格、交互设计、验收标准。支持 Mermaid 流程图、UI 线框图示例。
+
+---
+
+### prd-test-writer — PRD 测试用例生成与评审
+
+**作者**：[云舒](https://github.com/yunshu0909/yunshu_skillshub) | 文件：`SKILL.md` + `assets/` + `references/` + `samples/`
+
+从 PRD 自动生成测试用例，并进行对抗性评审。输出包含 HTML 格式的评审报告和测试用例模板。
+
+---
+
+### prd-auto-test-loop — PRD 自动化测试闭环
+
+**作者**：[云舒](https://github.com/yunshu0909/yunshu_skillshub) | 文件：`SKILL.md` + `agents/`
+
+PRD → 测试用例 → 自动化执行 → 结果反馈的完整闭环。
+
+---
+
+### multi-perspective-analysis — 多视角分析
+
+**作者**：[云舒](https://github.com/yunshu0909/yunshu_skillshub) | 文件：`SKILL.md` + 11 份参考文档
+
+内置 10 位业界领袖的思维模型作为分析视角：
+
+| 视角 | 思维模型 |
+|---|---|
+| Dan Sullivan | 10 倍增长思维 |
+| Elon Musk | 第一性原理 |
+| 张小龙 | 产品直觉 |
+| MrBeast | 创作者增长 |
+| Charlie Munger | 多元思维模型 |
+| Peter Thiel | 从 0 到 1 |
+| Steve Jobs | 产品愿景 |
+| Jeff Bezos | 客户至上 |
+| 张一鸣 | 算法思维 |
+| 任正非 | 战略生存 |
+
+---
+
+### readable-output — 可读性输出优化
+
+**作者**：[云舒](https://github.com/yunshu0909/yunshu_skillshub) | 文件：`SKILL.md`
+
+优化 Agent 输出的可读性：结构化、分层、重点突出，让长内容更易阅读和理解。
+
+---
+
 ### claude-code-style-html — 暖色纸质风格 HTML 生成
 
-**版本 2.0.0** | 文件：`SKILL.md` + `template.html`
+**原创** | 版本 2.0.0 | 文件：`SKILL.md` + `template.html`
 
-一套完整的 HTML 页面设计系统，核心审美是**克制、温暖、有文档质感**：
-
-- **配色**：暖米白底 `#F7F4EE` + 陶土橙点睛 `#D97757`，不用纯白纯黑
-- **字体**：衬线标题 + 无衬线正文 + 等宽代码，营造书卷气
-- **18 种组件**：按钮、卡片、标签、输入框、代码块、表格、引用块、导航胶囊、时间线、标签页、柱状图、TL;DR 框等
-- **自检清单**：生成页面后逐项核对，确保风格一致
-
-**适用场景**：让 Agent 生成任何 HTML 页面时，自动应用统一的高级感设计。
-
-```
-你：帮我做一个项目汇报页面
-你：生成一份数据分析的 HTML 报告
-你：做个网页展示我的作品集
-```
+完整的 HTML 页面设计系统：暖米白底 + 陶土橙点睛、衬线标题 + 无衬线正文、18 种组件、自检清单。
 
 ---
 
 ### problem-goal-defined — 问题定义与目标拆解
 
-**版本 1.0.0** | 文件：`SKILL.md` + `reference-problem.md` + `reference-goal.md`
+**原创** | 版本 1.0.0 | 文件：`SKILL.md` + 2 份参考文档
 
-覆盖从"定义问题"到"拆解目标"的完整思维链：
-
-**问题定义（5 步）**：5W2H 澄清 → 5 Whys 追根因 → 边界分析 → 问题重构 → 假设检验
-
-**目标拆解（8 步）**：SMART 锚定 → 逆向推导 → 拆解维度 → WBS 构建 → 优先级排序 → 依赖识别 → 里程碑 → 风险预案
-
-**方法论来源**：管理学（5W2H/5Whys）、系统工程（边界分析）、认知心理学（框架效应/确认偏误）、设计思维（共情/HMW）、六西格玛（SIPOC/鱼骨图）、项目管理（WBS/SMART/CPM/PERT）、战略管理（OKR/BSC）、敏捷方法论
-
-```
-你：帮我定义一下"面试官标准不统一"这个问题
-你：帮我拆解"提升团队交付效率"这个目标
-你：分析一下这个问题出在哪
-```
+问题定义（5 步）：5W2H → 5 Whys → 边界分析 → 问题重构 → 假设检验。目标拆解（8 步）：SMART → 逆向推导 → WBS → 优先级 → 依赖 → 里程碑 → 风险预案。
 
 ---
 
-### topic-question-generator — 课题研究问题引擎
+### storage-analyzer — 全平台存储分析
 
-**版本 5.0.0** | 文件：`SKILL.md`
+**作者**：[卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `assets/` + `references/` + `scripts/`
 
-一个"问题引擎"而非"答案引擎"。面对任何课题，系统性生成循序渐进的探究问题清单：
-
-- 7 步工作流：素材问询 → 课题分类 → 认知诊断 → 双视角生成 → 课程式编排 → 交互共创 → 结构化回答
-- 8 种通用提问范式 + 领域专属问题模式
-- 6 阶段渐进学习路径
-
-```
-你：帮我分析一下"大模型在金融领域的应用"这个课题
-你：关于量化投资，我应该了解什么？
-```
+macOS / Windows 双平台只读存储分析：🟢可自动清理 / 🟡需判断 / 🔴谨慎清理 三级分类，生成交互式 HTML 报告 + 本地服务一键清理。
 
 ---
 
-### equity-fund-attribution — 权益基金业绩归因
+### hv-analysis — 横纵分析法深度研究
 
-**版本 1.0.0** | 文件：`SKILL.md`
+**作者**：[卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `references/` + `scripts/`
 
-三条归因路径全覆盖：
-
-| 路径 | 方法 |
-|---|---|
-| 净值法 | T-M / H-M / C-L 择时选股、Fama-French 三/四/五因子、Carhart 模型 |
-| 持仓法 | Brinson 行业配置/选股、CT&CS 风格归因、Barra 多因子风险模型 |
-| 风险归因 | x-sigma-rho 分解 |
-
-基金经理能力圈六模块分析：投资方法、资产配置、风格、行业、选股、交易。
+纵轴追踪发展历程，横轴竞品对比，交叉产出洞察，输出 PDF 报告。
 
 ---
 
-### fof-performance-attribution — FOF 基金业绩归因
+### leader — Agent 目标任务书生成器
 
-**版本 1.0.0** | 文件：`SKILL.md` + `references/` + `scripts/`
+**作者**：[卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `references/`
 
-三种工作模式：
-
-1. **分析计算**：输入净值/持仓数据 → Brinson 归因 + 多因子回归 + T-M/H-M 择时检验
-2. **报告撰写**：按券商/FOF 管理人专业体例输出归因报告
-3. **投资决策**：评估基金经理选基与择时能力
-
-附带 Python CLI 工具（`fof_attribution.py`），支持 Carino 多期链接、滚动 Alpha 等高级功能。
-
----
-
-### c-drive-cleanup — Windows C 盘清理
-
-**版本 1.0.0** | 文件：`SKILL.md`
-
-6 步工作流：扫描目录 → 递归深入 → 定位大文件 → 生成报告 → 确认后执行 → 汇报结果
-
-自动识别可安全清理的项目：pip/npm 缓存、浏览器缓存、VS Code 扩展缓存等。执行前必须用户确认。
-
----
-
-### storage-analyzer — 全平台存储分析（来自卡兹克）
-
-**作者**：[数字生命卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `assets/` + `references/` + `scripts/`
-
-macOS / Windows 双平台只读存储分析助手：
-
-- 扫描整机磁盘占用，找出占空间大户
-- 每项分三级：🟢可自动清理 / 🟡需人工判断 / 🔴谨慎清理
-- 生成交互式 HTML 报告（可折叠、命令可一键复制）
-- 可起本地服务在网页上一键删除（移废纸篓）
-- 扫描全程只读，不修改任何文件
-
-比 c-drive-cleanup 更完善，支持 macOS 和 Windows，有可视化报告。
-
----
-
-### hv-analysis — 横纵分析法深度研究（来自卡兹克）
-
-**作者**：[数字生命卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `references/` + `scripts/`
-
-融合索绪尔历时-共时分析、纵向-横截面研究设计与商学院案例研究法：
-
-- **纵轴**：追踪从诞生到当下的完整生命历程（以叙事故事呈现）
-- **横轴**：在当下时间截面上与竞品/同类系统性横向对比
-- **交叉**：两条轴产出独到洞察
-- 最终产出一份排版精美的 PDF 研究报告
-
-```
-你：帮我研究一下 Cursor 这个产品
-你：深度分析一下 Notion 是怎么做起来的
-```
-
----
-
-### leader — Agent 目标任务书生成器（来自卡兹克）
-
-**作者**：[数字生命卡兹克](https://github.com/KKKKhazix/khazix-skills) | 文件：`SKILL.md` + `references/`
-
-三个角色：**领导**（你）出想法、**管理者**（Agent）调研写书、**执行者**（Agent 执行模式）拿书独立跑完。
-
-- 先进代码库实测、必要时联网调研
-- 一次性提问（≤5 个），产出 ≤4000 字符的任务书
-- 含实测数字、白名单地界、防作弊验收和断点续跑
-- 执行型与探索型自动分流
-
-```
-你：帮我给 agent 写个目标，把这个项目重构一下
-你：写个任务书让 agent 自己跑这个数据清洗
-```
+领导出想法 → 管理者调研写书 → 执行者拿书独立跑完。含实测数字、白名单地界、防作弊验收。
 
 ---
 
@@ -250,52 +202,38 @@ shared-files/
 ├── README.md
 ├── LICENSE
 ├── skills/
-│   ├── ATTRIBUTION.md                  # 社区贡献归属说明
-│   ├── claude-code-style-html/         # 暖色 HTML 设计系统
-│   │   ├── SKILL.md
-│   │   └── template.html
-│   ├── problem-goal-defined/           # 问题定义与目标拆解
-│   │   ├── SKILL.md
-│   │   ├── reference-problem.md
-│   │   └── reference-goal.md
-│   ├── topic-question-generator/       # 课题研究问题引擎
-│   │   └── SKILL.md
-│   ├── c-drive-cleanup/                # Windows C 盘清理
-│   │   └── SKILL.md
-│   ├── equity-fund-attribution/        # 权益基金业绩归因
-│   │   └── SKILL.md
-│   ├── fof-performance-attribution/    # FOF 业绩归因
-│   │   ├── SKILL.md
-│   │   ├── references/
-│   │   │   ├── methodology.md
-│   │   │   └── report-template.md
-│   │   └── scripts/
-│   │       └── fof_attribution.py
-│   ├── storage-analyzer/               # 全平台存储分析（来自卡兹克）
-│   │   ├── SKILL.md
-│   │   ├── assets/
-│   │   ├── references/
-│   │   └── scripts/
-│   ├── hv-analysis/                    # 横纵分析法深度研究（来自卡兹克）
-│   │   ├── SKILL.md
-│   │   ├── references/
-│   │   └── scripts/
-│   └── leader/                         # Agent 目标任务书（来自卡兹克）
-│       ├── SKILL.md
-│       └── references/
+│   ├── ATTRIBUTION.md
+│   ├── claude-code-style-html/         # [原创] 暖色 HTML 设计系统
+│   ├── problem-goal-defined/           # [原创] 问题定义与目标拆解
+│   ├── topic-question-generator/       # [原创] 课题研究问题引擎
+│   ├── c-drive-cleanup/                # [原创] Windows C 盘清理
+│   ├── equity-fund-attribution/        # [原创] 权益基金业绩归因
+│   ├── fof-performance-attribution/    # [原创] FOF 业绩归因
+│   ├── prd-doc-writer/                 # [云舒] PRD 撰写
+│   ├── prd-test-writer/                # [云舒] PRD 测试用例
+│   ├── prd-auto-test-loop/             # [云舒] PRD 自动化测试
+│   ├── multi-perspective-analysis/     # [云舒] 多视角分析
+│   ├── readable-output/                # [云舒] 可读性输出
+│   ├── git-push/                       # [云舒] Git 推送
+│   ├── github-repo-search/             # [云舒] GitHub 搜索
+│   ├── storage-analyzer/               # [卡兹克] 全平台存储分析
+│   ├── hv-analysis/                    # [卡兹克] 横纵深度研究
+│   └── leader/                         # [卡兹克] Agent 任务书
 ```
 
 ---
 
-## 🤝 贡献
+## 🤝 贡献与来源
 
-欢迎 Fork 并提交 PR，分享你自己的 Skills。
+本仓库收录了三类 Skills：
 
-提交新 Skill 时请确保：
+- **原创**：个人工作中沉淀的 Skills
+- **社区精选**：来自优秀开源作者的 Skills（已标注来源和 License）
+- 欢迎 Fork 并提交 PR 分享你的 Skills
 
-- `SKILL.md` 包含完整的 frontmatter（name / description / version）
-- 不包含个人信息（API Key、本地路径等）
-- 描述清晰说明"什么时候触发"和"做什么"
+提交新 Skill 时请确保：`SKILL.md` 包含完整的 frontmatter（name / description / version），不含个人信息（API Key、本地路径等），描述清晰说明"什么时候触发"和"做什么"。
+
+社区贡献归属详见 [ATTRIBUTION.md](skills/ATTRIBUTION.md)。
 
 ---
 
@@ -307,5 +245,5 @@ shared-files/
 
 <p align="center">
   Made with 🤖 for QoderWork<br>
-  <sub>好用的 Skills，值得被更多人使用</sub>
+  <sub>一次整理，到处可用</sub>
 </p>
