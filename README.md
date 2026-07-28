@@ -15,7 +15,7 @@
 | | 说明 |
 |---|---|
 | 适用平台 | QoderWork / QoderCLI / 任何支持 SKILL.md 的 Agent |
-| 技能数量 | **16 个**（9 原创 + 7 社区精选），覆盖产品、分析、学习、开发场景 |
+| 技能数量 | **17 个**（9 原创 + 7 社区精选），覆盖产品、分析、学习、开发场景 |
 | 使用方式 | 克隆后一行命令同步到本地 skills 目录 |
 
 ---
@@ -50,7 +50,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 
 ---
 
-## 🧰 16 个 Skills 全览
+## 🧰 17 个 Skills 全览
 
 ### 产品管理
 
@@ -209,6 +209,7 @@ shared-files/
 │   ├── c-drive-cleanup/                # [原创] Windows C 盘清理
 │   ├── equity-fund-attribution/        # [原创] 权益基金业绩归因
 │   ├── fof-performance-attribution/    # [原创] FOF 业绩归因
+│   ├── fixed-income-fund-attribution/  # [原创] 固收基金业绩归因
 │   ├── prd-doc-writer/                 # [云舒] PRD 撰写
 │   ├── prd-test-writer/                # [云舒] PRD 测试用例
 │   ├── prd-auto-test-loop/             # [云舒] PRD 自动化测试
