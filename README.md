@@ -1,8 +1,8 @@
 # shared-files
 
-🧩 **Skills 同步中心 — 16 个 Agent Skills，换电脑换平台一键拉齐**
+🧩 **Skills 同步中心 — 18 个 Agent Skills，换电脑换平台一键拉齐**
 
-个人的 Agent Skills 集中管理仓库。无论在哪个 Agent 平台、哪台电脑上工作，一行命令就能把所有 Skills 同步到本地。收录原创 Skills 和社区精选，覆盖产品管理、金融分析、思维学习、开发运维等场景。
+个人的 Agent Skills 集中管理仓库。无论在哪个 Agent 平台、哪台电脑上工作，一行命令就能把所有 Skills 同步到本地。收录原创 Skills 和社区精选，覆盖产品管理、金融分析、数据分析、思维学习、开发运维等场景。
 
 ---
 
@@ -15,7 +15,7 @@
 | | 说明 |
 |---|---|
 | 适用平台 | QoderWork / QoderCLI / 任何支持 SKILL.md 的 Agent |
-| 技能数量 | **17 个**（10 原创 + 7 社区精选），覆盖产品、分析、学习、开发场景 |
+| 技能数量 | **18 个**（7 原创 + 11 社区精选），覆盖产品、分析、学习、开发场景 |
 | 使用方式 | 克隆后一行命令同步到本地 skills 目录 |
 
 ---
@@ -50,7 +50,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 
 ---
 
-## 🧰 17 个 Skills 全览
+## 🧰 18 个 Skills 全览
 
 ### 产品管理
 
@@ -77,6 +77,12 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 | [`multi-perspective-analysis`](skills/multi-perspective-analysis/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | 多视角分析：内置 10 位大佬思维模型（张小龙/张一鸣/任正非/Munger/Musk/Bezos 等） | "多视角分析"、"换个角度想" |
 | [`readable-output`](skills/readable-output/) | [云舒](https://github.com/yunshu0909/yunshu_skillshub) | 可读性输出优化，让 Agent 产出更易读 | "优化输出"、"可读性" |
 
+### 数据分析与统计
+
+| 技能 | 来源 | 干什么 | 触发词 |
+|---|---|---|---|
+| [`statistical-analysis`](skills/statistical-analysis/) | [TerryFYL](https://github.com/TerryFYL/claude-statistical-analysis-skill) | 统计分析顾问：数据诊断 → 方法选择 → APA 表格+图表+结果段落，支持问卷/实验/医学研究 | "统计分析"、"分析我的数据"、"问卷分析" |
+
 ### 金融分析
 
 | 技能 | 来源 | 干什么 | 触发词 |
@@ -101,6 +107,27 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/sliec/shared-files/mai
 ---
 
 ## 📖 各 Skill 详解
+
+### statistical-analysis — 统计分析顾问
+
+**作者**：[TerryFYL](https://github.com/TerryFYL/claude-statistical-analysis-skill) | 文件：`SKILL.md` + `assets/` + `references/` + `docker/`
+
+把 AI 变成专业统计顾问，核心理念是"先诊断数据，再选方法"。
+
+全流程覆盖：数据画像（样本量/变量类型/缺失模式/分布特征）→ 前提假设检验（正态性/方差齐性）→ 智能方法选择 → 执行分析 → APA 三件套输出（表格 + 图表 + 结果段落）。
+
+支持的分析方法：
+
+| 复杂度 | 方法 |
+|---|---|
+| 简单 | 描述统计、t检验、卡方检验、相关分析、信效度检验（Cronbach's alpha） |
+| 中等 | 回归、ANOVA、调节效应、中介效应、ROC/AUC、生存分析 |
+| 复杂 | SEM/CFA、HLM、IRT、元分析、倾向得分匹配 |
+| 规划 | 样本量计算 / Power Analysis |
+
+特别适合问卷调查分析：内置信效度分析、缺失数据处理、中文图表支持。
+
+---
 
 ### prd-doc-writer — PRD 产品需求文档撰写
 
@@ -210,6 +237,7 @@ shared-files/
 │   ├── equity-fund-attribution/        # [原创] 权益基金业绩归因
 │   ├── fof-performance-attribution/    # [原创] FOF 业绩归因
 │   ├── fixed-income-fund-attribution/  # [原创] 固收基金业绩归因
+│   ├── statistical-analysis/           # [TerryFYL] 统计分析顾问
 │   ├── prd-doc-writer/                 # [云舒] PRD 撰写
 │   ├── prd-test-writer/                # [云舒] PRD 测试用例
 │   ├── prd-auto-test-loop/             # [云舒] PRD 自动化测试
