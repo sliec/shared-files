@@ -19,3 +19,8 @@ Licensed under [MIT](https://github.com/yunshu0909/yunshu_skillshub/blob/master/
 - **readable-output** — 可读性输出优化
 - **git-push** — Git 推送助手
 - **github-repo-search** — GitHub 仓库搜索
+
+## From [TerryFYL](https://github.com/TerryFYL/claude-statistical-analysis-skill)
+Licensed under [MIT](https://github.com/TerryFYL/claude-statistical-analysis-skill/blob/main/LICENSE).
+
+- **statistical-analysis** — 统计分析顾问：数据诊断 → 方法选择 → APA 表格+图表+结果段落，支持问卷/实验/医学研究等场景
