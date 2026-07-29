@@ -24,3 +24,26 @@ Licensed under [MIT](https://github.com/yunshu0909/yunshu_skillshub/blob/master/
 Licensed under [MIT](https://github.com/TerryFYL/claude-statistical-analysis-skill/blob/main/LICENSE).
 
 - **statistical-analysis** — 统计分析顾问：数据诊断 → 方法选择 → APA 表格+图表+结果段落，支持问卷/实验/医学研究等场景
+
+## From [CNFeffery (费弗里)](https://github.com/CNFeffery)
+Dash 生态作者，fork 了 19 个 Dash 相关仓库。
+
+- **fireworks-tech-graph** — 技术架构图生成器（含多种可视化风格）
+
+## QoderWork 内置技能
+
+以下技能为 QoderWork 平台内置，同步至此仓库便于跨设备使用：
+
+- **飞书生态**（26个）：lark-doc, lark-sheets, lark-base, lark-im, lark-mail, lark-calendar, lark-contact, lark-task, lark-okr, lark-drive, lark-wiki, lark-approval, lark-attendance, lark-apps, lark-event, lark-markdown, lark-minutes, lark-slides, lark-whiteboard, lark-vc, lark-vc-agent, lark-shared, lark-openapi-explorer, lark-skill-maker, lark-workflow-meeting-summary, lark-workflow-standup-report
+- **文档处理**（4个）：docx, pdf, pptx, xlsx
+- **系统工具**：qoderwork-guidance, computer-use-guidance-windows, vm-error-recovery, create-skill, find-skills, install-skill-dependency, plugin-creator, c-drive-cleanup, claude-code-style-html, ima-skill
+
+## 原创技能
+
+以下技能为个人原创：
+
+- **equity-fund-attribution** — 股票型基金业绩归因分析
+- **fof-performance-attribution** — FOF 基金业绩归因（Brinson/T-M/H-M/风险）
+- **fixed-income-fund-attribution** — 固收基金业绩归因
+- **problem-goal-defined** — 问题目标定义与拆解
+- **topic-question-generator** — 主题问题生成器
