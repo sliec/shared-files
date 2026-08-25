@@ -1,0 +1,61 @@
+examples:
+  - id: start-and-monitor
+    title:
+      zh: 启动并监测公众号文章
+      en: Start and monitor account articles
+    description:
+      zh: 启动本地监测服务，检查凭据，拉取指定公众号的近期文章
+      en: Start the local server, check credentials, and fetch recent articles for given accounts
+    prompt:
+      zh: |-
+        帮我监测这几个公众号最近 7 天的文章：{{公众号名称列表}}
+
+        如果服务没在跑就先启动，凭据有问题告诉我怎么处理。
+      en: |-
+        Monitor these WeChat official accounts for the last 7 days: {{account names}}
+
+        Start the server if it's not running, and tell me what to do about credential issues.
+  - id: batch-import
+    title:
+      zh: 批量导入公众号
+      en: Batch import accounts
+    description:
+      zh: 把一批公众号名称导入到指定分类
+      en: Import a list of account names into a category
+    prompt:
+      zh: |-
+        把下面这些公众号导入监测应用，放到「{{分类名称}}」分类下：
+
+        {{公众号名称列表，每行一个}}
+      en: |-
+        Import the following accounts into the monitor app under category "{{category name}}":
+
+        {{account names, one per line}}
+  - id: diagnose-error
+    title:
+      zh: 诊断报错
+      en: Diagnose errors
+    description:
+      zh: 监测报错时定位问题（限流/凭据过期/封号）并给出解决办法
+      en: Figure out whether an error is rate-limiting, expired credentials, or account restriction
+    prompt:
+      zh: |-
+        监测的时候报错了：{{报错信息}}
+
+        帮我查一下到底是哪里的问题，是不是被封了，该怎么解决。
+      en: |-
+        Monitoring returned this error: {{error message}}
+
+        Find out what went wrong, whether the account is banned, and how to fix it.
+  - id: download-articles
+    title:
+      zh: 下载文章正文
+      en: Download article bodies
+    description:
+      zh: 把监测到的文章抓取正文并保存为 Markdown
+      en: Fetch monitored articles and save them as Markdown
+    prompt:
+      zh: |-
+        把 {{公众号名称}} 最近的文章正文下载成 Markdown，保存到 {{输出目录}}。
+      en: |-
+        Download the recent articles of {{account name}} as Markdown into {{output directory}}.
