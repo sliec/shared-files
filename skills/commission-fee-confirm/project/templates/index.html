@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>佣金与两费确认生成器</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f7f8fa; color: #1f2329; min-height: 100vh;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 32px 24px 64px; }
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  h1 { font-size: 22px; font-weight: 600; }
+  .sub { color: #86909c; font-size: 13px; margin-top: 6px; }
+  .card {
+    background: #fff; border-radius: 12px; padding: 24px;
+    box-shadow: 0 1px 4px rgba(31,35,41,.06), 0 4px 16px rgba(31,35,41,.04);
+    margin-bottom: 20px;
+  }
+  .card h2 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .card .hint { color: #86909c; font-size: 12.5px; margin-bottom: 14px; }
+  .drop {
+    border: 1.5px dashed #c9cdd4; border-radius: 10px; padding: 22px 16px;
+    text-align: center; color: #86909c; font-size: 13px; cursor: pointer;
+    transition: all .15s; background: #fafbfc;
+  }
+  .drop.on { border-color: #3370ff; background: #f0f4ff; color: #3370ff; }
+  .drop input { display: none; }
+  .flist { margin-top: 10px; font-size: 13px; }
+  .flist .f { display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 10px; border-radius: 6px; background: #f2f3f5; margin-top: 6px; }
+  .flist .f .x { cursor: pointer; color: #86909c; font-weight: bold; }
+  .flist .f .x:hover { color: #f53f3f; }
+  .btn {
+    display: inline-block; border: none; border-radius: 8px; cursor: pointer;
+    font-size: 14px; padding: 10px 22px; transition: all .15s;
+  }
+  .btn.primary { background: #3370ff; color: #fff; }
+  .btn.primary:hover { background: #2860e0; }
+  .btn.primary:disabled { background: #a8c6ff; cursor: not-allowed; }
+  .btn.ghost { background: #f2f3f5; color: #4e5969; }
+  .btn.ghost:hover { background: #e5e6eb; }
+  .bar { display: flex; align-items: center; gap: 14px; margin-top: 4px; }
+  .spin { width: 16px; height: 16px; border: 2px solid #d0d5dd; border-top-color: #3370ff;
+    border-radius: 50%; animation: r .8s linear infinite; display: none; }
+  @keyframes r { to { transform: rotate(360deg); } }
+  .err { background: #ffece8; color: #cb2634; border-radius: 8px; padding: 10px 14px;
+    font-size: 13px; margin-top: 14px; display: none; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: #86909c; font-weight: 500; padding: 8px 10px;
+    border-bottom: 1px solid #e5e6eb; white-space: nowrap; }
+  td { padding: 10px; border-bottom: 1px solid #f2f3f5; white-space: nowrap; }
+  td.num { font-variant-numeric: tabular-nums; text-align: right; }
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; }
+  .tag.ok { background: #e8ffea; color: #00b42a; }
+  .tag.mut { background: #f2f3f5; color: #86909c; }
+  a.dl { color: #3370ff; text-decoration: none; }
+  a.dl:hover { text-decoration: underline; }
+  .note { color: #86909c; font-size: 12px; margin-top: 12px; }
+  /* 弹窗 */
+  .mask { position: fixed; inset: 0; background: rgba(31,35,41,.4); display: none;
+    align-items: center; justify-content: center; z-index: 10; }
+  .modal { background: #fff; border-radius: 12px; padding: 26px; width: 420px; }
+  .modal h3 { font-size: 16px; margin-bottom: 16px; }
+  .modal label { display: block; font-size: 13px; color: #4e5969; margin: 12px 0 5px; }
+  .modal input { width: 100%; border: 1px solid #c9cdd4; border-radius: 8px;
+    padding: 8px 10px; font-size: 13px; }
+  .modal .foot { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+  .okmsg { color: #00b42a; font-size: 12px; margin-left: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>佣金与两费确认生成器</h1>
+      <div class="sub">上传社保/养老组合余额表 → 自动生成两费确认函 + 应付佣金明细（纯本地运行）</div>
+    </div>
+    <button class="btn ghost" onclick="openSettings()">设置</button>
+  </header>
+
+  <div class="card">
+    <h2>① 余额表（必填，可多选）</h2>
+    <div class="hint">每组合一份 .xls，如 YL0802…余额表20260701至20260930.xls、HZ1103…</div>
+    <div class="drop" id="dropBal">
+      拖入或点击选择余额表文件（.xls）
+      <input type="file" id="fileBal" multiple accept=".xls">
+    </div>
+    <div class="flist" id="listBal"></div>
+  </div>
+
+  <div class="card">
+    <h2>② 上季应付佣金明细（可选，提供席位号）</h2>
+    <div class="hint">.xlsx，sheet 名为组合代码；不上传则佣金席位列留空</div>
+    <div class="drop" id="dropPrev">
+      拖入或点击选择上季佣金明细（.xlsx）
+      <input type="file" id="filePrev" multiple accept=".xlsx">
+    </div>
+    <div class="flist" id="listPrev"></div>
+  </div>
+
+  <div class="card">
+    <div class="bar">
+      <button class="btn primary" id="btnGo" onclick="generate()">生成确认文件</button>
+      <div class="spin" id="spin"></div>
+      <span class="sub" id="status"></span>
+    </div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div class="card" id="resultCard" style="display:none">
+    <h2>生成结果</h2>
+    <div class="hint" id="outDir"></div>
+    <table id="resultTable">
+      <thead><tr>
+        <th>组合</th><th>期间</th><th>托管费</th><th>基础管理费</th>
+        <th>佣金券商数</th><th>佣金合计</th><th>说明</th><th>下载</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div style="margin-top:16px">
+      <button class="btn ghost" onclick="location.href='/api/zip'">打包下载全部（zip）</button>
+    </div>
+    <div class="note">两费取余额表 2206/2207 本期贷方计提额；佣金取 2209.01 下券商级期末余额，只展示本季有费用的券商；文件同时保存到上方输出目录。</div>
+  </div>
+</div>
+
+<!-- 设置弹窗 -->
+<div class="mask" id="mask">
+  <div class="modal">
+    <h3>设置</h3>
+    <label>输出目录</label>
+    <input id="cfgOut" placeholder="默认桌面">
+    <label>API Key（硅基流动等，OpenAI 兼容）</label>
+    <input id="cfgKey" placeholder="sk-..." type="password">
+    <label>Base URL</label>
+    <input id="cfgBase" placeholder="https://api.siliconflow.cn/v1">
+    <div class="note" style="margin-top:10px">核心生成流程纯本地运行、不调用任何 AI；API Key 仅为后续 AI 辅助功能预留配置。<span id="keyState" class="okmsg"></span></div>
+    <div class="foot">
+      <button class="btn ghost" onclick="testKey()">测试连通</button>
+      <button class="btn ghost" onclick="closeSettings()">取消</button>
+      <button class="btn primary" onclick="saveSettings()">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let balFiles = [], prevFiles = [];
+
+function bindDrop(dropId, inputId, listId, arr) {
+  const drop = document.getElementById(dropId);
+  const input = document.getElementById(inputId);
+  const list = document.getElementById(listId);
+  drop.onclick = () => input.click();
+  input.onchange = () => { addFiles(arr, input.files, list); input.value = ""; };
+  drop.ondragover = e => { e.preventDefault(); drop.classList.add("on"); };
+  drop.ondragleave = () => drop.classList.remove("on");
+  drop.ondrop = e => {
+    e.preventDefault(); drop.classList.remove("on");
+    addFiles(arr, e.dataTransfer.files, list);
+  };
+}
+function addFiles(arr, files, list) {
+  for (const f of files) {
+    if (!arr.some(x => x.name === f.name && x.size === f.size)) arr.push(f);
+  }
+  renderList(arr, list);
+}
+function renderList(arr, list) {
+  list.innerHTML = arr.map((f, i) =>
+    `<div class="f"><span>${f.name}（${(f.size/1024).toFixed(0)} KB）</span><span class="x" onclick="rmFile(${list.id==='listBal'?'bal':'prev'}Files,${i},'${list.id}')">×</span></div>`).join("");
+}
+function rmFile(arr, i, listId) {
+  arr.splice(i, 1);
+  renderList(arr, document.getElementById(listId));
+}
+bindDrop("dropBal", "fileBal", "listBal", balFiles);
+bindDrop("dropPrev", "filePrev", "listPrev", prevFiles);
+
+async function generate() {
+  const btn = document.getElementById("btnGo");
+  const spin = document.getElementById("spin");
+  const err = document.getElementById("err");
+  const st = document.getElementById("status");
+  err.style.display = "none";
+  if (!balFiles.length) { err.textContent = "请先上传至少一个余额表 .xls 文件"; err.style.display = "block"; return; }
+  btn.disabled = true; spin.style.display = "inline-block"; st.textContent = "正在生成…";
+  try {
+    const fd = new FormData();
+    balFiles.forEach(f => fd.append("balance", f));
+    prevFiles.forEach(f => fd.append("prev", f));
+    const r = await fetch("/api/generate", { method: "POST", body: fd });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || "生成失败");
+    renderResult(j);
+    st.textContent = `完成，${j.results.length} 个组合`;
+  } catch (e) {
+    err.textContent = e.message; err.style.display = "block"; st.textContent = "";
+  } finally {
+    btn.disabled = false; spin.style.display = "none";
+  }
+}
+function fmt(n) { return n.toLocaleString("zh-CN", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function renderResult(j) {
+  document.getElementById("resultCard").style.display = "";
+  document.getElementById("outDir").textContent = "输出目录：" + j.out_dir;
+  document.getElementById("tbody").innerHTML = j.results.map(r => `
+    <tr>
+      <td><b>${r.display}</b></td>
+      <td>${r.period}</td>
+      <td class="num">${fmt(r.cust_fee)}</td>
+      <td class="num">${fmt(r.mgmt_fee)}</td>
+      <td class="num">${r.comm_rows || 0}</td>
+      <td class="num">${r.comm_rows ? fmt(r.comm_total) : "—"}</td>
+      <td style="white-space:normal;max-width:260px">${r.comm_rows
+        ? `<span class="tag ok">席位匹配 ${r.seats_matched}/${r.comm_rows}</span>`
+        : `<span class="tag mut">佣金留空占位</span>`}</td>
+      <td><a class="dl" href="/download/${encodeURIComponent(r.file)}">下载</a></td>
+    </tr>`).join("");
+}
+
+/* 设置 */
+async function openSettings() {
+  const j = await (await fetch("/api/settings")).json();
+  document.getElementById("cfgOut").value = j.output_dir || "";
+  document.getElementById("cfgBase").value = j.base_url || "";
+  document.getElementById("cfgKey").value = "";
+  document.getElementById("keyState").textContent = j.api_key_masked ? `已保存：${j.api_key_masked}` : "";
+  document.getElementById("mask").style.display = "flex";
+}
+function closeSettings() { document.getElementById("mask").style.display = "none"; }
+async function saveSettings() {
+  const body = {
+    output_dir: document.getElementById("cfgOut").value,
+    base_url: document.getElementById("cfgBase").value,
+  };
+  const k = document.getElementById("cfgKey").value.trim();
+  if (k) body.api_key = k;   // 留空则保留已存 key
+  await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(body) });
+  closeSettings();
+}
+async function testKey() {
+  const st = document.getElementById("keyState");
+  st.style.color = "#86909c"; st.textContent = "测试中…";
+  const body = {
+    base_url: document.getElementById("cfgBase").value,
+  };
+  const k = document.getElementById("cfgKey").value.trim();
+  if (k) body.api_key = k;
+  const j = await (await fetch("/api/test_key", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(body) })).json();
+  st.style.color = j.ok ? "#00b42a" : "#cb2634";
+  st.textContent = j.ok ? "连通正常" : ("失败：" + (j.error || j.status));
+}
+document.getElementById("mask").onclick = e => { if (e.target.id === "mask") closeSettings(); };
+</script>
+</body>
+</html>
